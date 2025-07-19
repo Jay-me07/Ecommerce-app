@@ -7,8 +7,8 @@ export const ShopContext = createContext();
 
 const ShopContextProvider = (props) => {
 
-    const currency = '$';
-    const delivery_fee = 10;
+    const currency = 'ksh';
+    const delivery_fee = 200;
     const backendUrl = import.meta.env.VITE_BACKEND_URL;
     const [search,setSearch] = useState('');
     const [showSearch,setShowSearch] = useState(false);
@@ -22,7 +22,7 @@ const ShopContextProvider = (props) => {
         let cartData = structuredClone(cartItems);
 
         if (!size) {
-            toast.error('Please Select Product Size');
+            toast.error('Please Select Product Size before proceeding to the cart or checkout');
             return
         }
 
