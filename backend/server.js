@@ -30,4 +30,9 @@ app.get('/', (req,res)=>{
     res.send("API Working")
 })
 
+process.on('unhandledRejection', (reason, promise) => {
+    console.error('Unhandled Rejection:', reason);
+});
+
+
 app.listen(port, ()=> console.log('Server started on PORT: '+ port))

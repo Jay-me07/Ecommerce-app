@@ -1,50 +1,79 @@
-import { v2 as cloudinary } from "cloudinary"
 import productModel from "../models/productModel.js"
+import imagekit from '../config/imagekit.js'
+
 
 // Function to add product
 const addProduct = async (req, res) => {
-    try {
+  try {
+    const {
+      name,
+      description,
+      price,
+      category,
+      subCategory,
+      sizes,
+      bestSeller,
+    } = req.body;
 
-        const { name, description, price, category, subCategory, sizes, bestSeller } = req.body;
+    const image1 = req.files?.image1?.[0];
+    const image2 = req.files?.image2?.[0];
+    const image3 = req.files?.image3?.[0];
+    const image4 = req.files?.image4?.[0];
 
-        const image1 = req.files?.image1?.[0];
-        const image2 = req.files?.image2?.[0];
-        const image3 = req.files?.image3?.[0];
-        const image4 = req.files?.image4?.[0];
+    const images = [image1, image2, image3, image4].filter(
+      (item) => item !== undefined
+    );
 
+    //Upload images to imagekit
+    const imagesUrl = await Promise.all(
+      images.map(async (img) => {
+        try {
+          const response = await imagekit.upload({
+            file:  `data:${img.mimetype};base64,${img.buffer.toString("base64")}`,
+            fileName: img.originalname,
+            folder: "/jersey"
+          });
 
-        const images = [image1, image2, image3, image4].filter((item)=> item !== undefined);
+          //URL generation for images and videos
+          const optimizedURL = imagekit.url({
+            path: response.filePath,
+            transformation: [
+              { height: "390" },
+              { width: "450" },
+              { quality: "auto" },
+              { format: "webp" }
+            ]
+          })
 
-        let imagesUrl = await Promise.all(
-            images.map(async (item) => {
-                let result = await cloudinary.uploader.upload(item.path, {resource_type:'image'});
-                return result.secure_url
-            })
-        )
+          return optimizedURL
+        } catch (uploadedError) {
+          console.error("Error uploading image to ImageKit:", uploadedError?.message || uploadedError);
+          return undefined
+        }
+      })
+    )
+       
+    const productData = {
+      name,
+      description,
+      category,
+      price: Number(price),
+      subCategory,
+      bestSeller: bestSeller === "true" ? true : false,
+      sizes: JSON.parse(sizes),
+      image: imagesUrl,
+      date: Date.now(),
+    };
 
-       const productData = {
-        name,
-        description,
-        category,
-        price: Number(price),
-        subCategory,
-        bestSeller: bestSeller === "true" ? true : false,
-        sizes: JSON.parse(sizes),
-        image: imagesUrl,
-        date: Date.now()
-       }
-        console.log(productData);
+    const product = new productModel(productData);
+    await product.save();
 
-        const product = new productModel(productData);
-        await product.save()
-        
-        res.json({success:true,message:"Product added"})
-
-    } catch (error) {
-        console.log(error)
-        res.json({success:false,message:error.message})
-    }
-}
+    res.json({ success: true, message: "Product added" });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
 
 // Function for list product
 const listProducts = async (req,res) => {
