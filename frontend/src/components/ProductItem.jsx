@@ -1,16 +1,17 @@
 import React from 'react'
 import { useContext } from 'react'
 import { ShopContext } from '../context/ShopContext'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const ProductItem = ({id,image,name,price}) => {
     
     const {currency} = useContext(ShopContext)
+    const navigate = useNavigate()
 
   return (
     <Link to={`/product/${id}`} className='text-gray-700 cursor-pointer'>
         <div className='overflow-hidden'>
-           <img src={image[0]} className='hover:scale-110 transition ease-in-out' alt="" />
+           <img src={image[0]} onClick={() => {navigate(`/product/${id}`); scrollTo(0,0)}} className='hover:scale-110 transition ease-in-out h-60 w-full rounded' alt="" />
         </div>
         <p className='pt-3 pb-1 text-sm'>{name}</p>
         <p className='text-sm font-medium'>{currency}{price}</p>
