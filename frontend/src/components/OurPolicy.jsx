@@ -1,9 +1,14 @@
 import React from 'react'
 import { assets } from '../assets/frontend_assets/assets'
+import {motion, easeOut} from 'motion/react'
 
 const OurPolicy = () => {
   return (
-    <div className='flex felx-col sm:flex-row justify-around gap-12 sm:gap-2 text-center py-20 text-xs sm:text-sm md:text-base text-gray-700'>
+    <motion.div
+    initial={{ opacity: 0, y: 40 }}
+       whileInView={{ opacity: 1, y: 0 }}
+       transition={{duration: 1, delay: 0.5, ease: easeOut}}
+    className='flex felx-col sm:flex-row justify-around gap-12 sm:gap-2 text-center py-20 text-xs sm:text-sm md:text-base text-gray-700'>
      
         <div>
             <img src={assets.exchange_icon} className='w-12 m-auto mb-5' alt="" />
@@ -21,7 +26,7 @@ const OurPolicy = () => {
             <p className='text-gray-400'>We provide 24/7 customer support</p>
         </div>
 
-    </div>
+    </motion.div>
   )
 }
 

@@ -7,7 +7,7 @@ export const ShopContext = createContext();
 
 const ShopContextProvider = (props) => {
 
-    const currency = 'ksh';
+    const currency = 'KSH';
     const delivery_fee = 200;
     const backendUrl = import.meta.env.VITE_BACKEND_URL;
     const [search,setSearch] = useState('');
@@ -39,13 +39,19 @@ const ShopContextProvider = (props) => {
             cartData[itemId] = {};
             cartData[itemId][size] = 1;
         }
+        toast.success("Product has been added successfully to cart")
         setCartItems(cartData);
 
         if (token) {
             try {
 
-                await axios.post(backendUrl + '/api/cart/add', {itemId,size}, {headers:{token}})
-                toast.success("Product successfully added to cart!")
+                const response = await axios.post(backendUrl + '/api/cart/add', {itemId,size}, {headers:{token}})
+
+                if (response.data.success) {
+                    toast.success("Product has been added successfully to cart")
+                } else {
+                    toast.error(response.data.message)
+                }
 
             } catch (error) {
                 console.log(error);
@@ -53,6 +59,7 @@ const ShopContextProvider = (props) => {
                 
             }
         }
+
     }
     
     

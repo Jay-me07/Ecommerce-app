@@ -9,7 +9,7 @@ const ProductItem = ({id,image,name,price}) => {
     const navigate = useNavigate()
 
   return (
-    <Link to={`/product/${id}`} className='text-gray-700 cursor-pointer'>
+    <Link to={`/product/${id}`} className='text-gray-700 cursor-pointer rounded'>
         <div className='overflow-hidden'>
            <img src={image[0]} onClick={() => {navigate(`/product/${id}`); scrollTo(0,0)}} className='hover:scale-110 transition ease-in-out h-60 w-full rounded' alt="" />
         </div>

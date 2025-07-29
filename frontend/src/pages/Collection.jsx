@@ -90,13 +90,13 @@ const Collection = () => {
             <p className='mb-3 text-sm font-medium'>CATEGORIES</p>
             <div className='flex flex-col gap-2 text-sm font-light text-gray-700'>
               <p className='flex gap-2'>
-                <input type="checkbox" className='w-3' value={'Men'} onChange={toggleCategory} /> Men
+                <input type="checkbox" className='w-3 cursor-pointer' value={'EPL'} onChange={toggleCategory} /> EPL
               </p>
               <p className='flex gap-2'>
-                <input type="checkbox" className='w-3' value={'Women'} onChange={toggleCategory} /> Women
+                <input type="checkbox" className='w-3 cursor-pointer' value={'Others'} onChange={toggleCategory} /> Others
               </p>
               <p className='flex gap-2'>
-                <input type="checkbox" className='w-3' value={'Kids'} onChange={toggleCategory} /> Kids
+                <input type="checkbox" className='w-3 cursor-pointer' value={'Kids Jersey'} onChange={toggleCategory} /> Kids
               </p>
             </div> 
          </div>
@@ -105,13 +105,13 @@ const Collection = () => {
             <p className='mb-3 text-sm font-medium'>TYPE</p>
             <div className='flex flex-col gap-2 text-sm font-light text-gray-700'>
               <p className='flex gap-2'>
-                <input type="checkbox" className='w-3' value={'Topwear'} onChange={toggleSubCategory} /> TopWear
+                <input type="checkbox" className='w-3 cursor-pointer' value={'Standard Version'} onChange={toggleSubCategory} /> Standard Version
               </p>
               <p className='flex gap-2'>
-                <input type="checkbox" className='w-3' value={'Bottomwear'} onChange={toggleSubCategory} /> BottomWear
+                <input type="checkbox" className='w-3 cursor-pointer' value={'Fan Version'} onChange={toggleSubCategory} /> Fan Version
               </p>
               <p className='flex gap-2'>
-                <input type="checkbox" className='w-3' value={'Winterwear'} onChange={toggleSubCategory} /> WinterWear
+                <input type="checkbox" className='w-3 cursor-pointer' value={'Player Version'} onChange={toggleSubCategory} /> Player Version
               </p>
             </div> 
          </div>
@@ -124,7 +124,7 @@ const Collection = () => {
            <div className='flex justify-between text-base sm:text-2xl mb-4'>
              <Title text1={'ALL'} text2={'COLLECTIONS'} />
              {/* Product Sort */}
-             <select onChange={(e)=>setSortType(e.target.value)} className='border-2 border-gray-300 text-sm px-2'>
+             <select onChange={(e)=>setSortType(e.target.value)} className='border-2 border-gray-300 text-sm px-2 cursor-pointer'>
                 <option value="relevant">Sort by:Relevant</option>
                 <option value="low-high">Sort by:Low to High</option>
                 <option value="high-low">Sort by:High to Low</option>
