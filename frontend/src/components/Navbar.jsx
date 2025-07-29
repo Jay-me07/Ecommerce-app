@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react'
 import {assets} from '../assets/frontend_assets/assets'
 import { NavLink,Link } from 'react-router-dom'
 import { ShopContext } from '../context/ShopContext';
+import {motion} from 'motion/react'
 
 const Navbar = () => {
 
@@ -17,9 +18,13 @@ const Navbar = () => {
     }
 
   return (
-    <div className='flex items-center justify-between py-5 font-medium'>
+    <motion.div
+    initial={{y: -20, opacity: 0}}
+    animate={{y: 0, opacity: 1}}
+    transition={{duration: 0.5}}
+    className='flex items-center justify-between py-5 font-medium'>
        <Link to='/'>
-       <img src={assets.logo} className='w-36' alt='' />
+       <img src={assets.logo} className='w-36 border-none rounded h-25' alt='' />
        </Link>
 
        <ul className='hidden sm:flex gap-5 text-sm text-gray-700'>
@@ -87,7 +92,7 @@ const Navbar = () => {
 
        </div>
 
-    </div>
+    </motion.div>
   )
 }
 

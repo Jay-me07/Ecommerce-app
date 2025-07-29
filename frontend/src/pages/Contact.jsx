@@ -2,13 +2,21 @@ import React from 'react'
 import Title from '../components/Title'
 import { assets } from '../assets/frontend_assets/assets'
 import Newsletterbox from '../components/Newsletterbox'
+import {motion} from 'motion/react'
 
 const Contact = () => {
   return (
-    <div>
-        <div className='text-center text-2xl pt-10 border-t'>
+    <motion.div
+    initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1}}>
+        <motion.div
+        initial={{ opacity: 0, y: 40 }}
+       whileInView={{ opacity: 1, y: 0 }}
+       transition={{duration: 1, delay: 0.5}}
+        className='text-center text-2xl pt-10 border-t'>
           <Title text1={'CONTACT'} text2={'US'} />
-        </div>
+        </motion.div>
 
         <div className='my-10 flex flex-col justify-center md:flex-row gap-10 mb-28'>
            <img src={assets.contact_img} alt="" className='w-full md:max-w-[480px]' />
@@ -23,7 +31,7 @@ const Contact = () => {
            </div>
         </div>
         <Newsletterbox/>
-    </div>
+    </motion.div>
   )
 }
 

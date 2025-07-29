@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import { ShopContext } from '../context/ShopContext';
 import { assets } from '../assets/frontend_assets/assets';
 import RelatedProducts from '../components/RelatedProducts';
+import {motion} from 'motion/react'
 
 const Product = () => {
 
@@ -34,7 +35,11 @@ const Product = () => {
       <div className='flex gap-12 sm:gap-12 flex-col sm:flex-row'>
         
         {/* --------------------Product Images------------------ */}
-        <div className='flex-1 flex flex-col-reverse gap-3 sm:flex-row'>
+        <motion.div
+        initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6}}
+        className='flex-1 flex flex-col-reverse gap-3 sm:flex-row'>
           <div className='flex sm:flex-col overflow-x-auto sm:overflow-y-scroll justify-between sm:justify-normal sm:w-[18.7%]'>
              {
                 productData.image.map((item,index)=>(
@@ -45,7 +50,7 @@ const Product = () => {
           <div className='w-full sm:w-[80%]'>
             <img src={image} className='w-full h-auto' alt="" />
           </div>
-        </div>
+        </motion.div>
 
         {/* -------------------------Product info---------------------- */}
         <div className='flex-1'>
@@ -85,8 +90,8 @@ const Product = () => {
           <p className='border px-5 py-3 text-sm'>Reviews (122)</p>
         </div>
         <div className='flex flex-col gap-4 border px-6 py-6 text-sm text-gray-500'>
-          <p>This is an ecommerce plartform that I used to learn and showcase my abilities</p>
-          <p>One day one time.Day one vs one day. Believe in yourself && Trust God always.</p>
+          <p>Easy and simple just pick your size and then head over to checkout</p>
+          <p>Incase of any troubles call 0703424896.Thankyou for choosing us.</p>
         </div>
       </div>
 

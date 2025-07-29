@@ -5,6 +5,7 @@ import { assets } from '../assets/frontend_assets/assets'
 import { ShopContext } from '../context/ShopContext'
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import {motion} from 'motion/react'
 
 const PlaceOrder = () => {
 
@@ -132,13 +133,21 @@ const PlaceOrder = () => {
   
 
   return (
-    <form onSubmit={onSubmitHandler} className='flex flex-col sm:flex-row justify-between gap-4 pt-5 sm:pt-14 min-h-[80vh] border-t'>
+    <motion.form
+    initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: 0.3}}
+    onSubmit={onSubmitHandler} className='flex flex-col sm:flex-row justify-between gap-4 pt-5 sm:pt-14 min-h-[80vh] border-t'>
         {/* -----------------Left Side-------------------------------- */}
         <div className='flex flex-col w-full gap-4 sm:max-w-[480px]'>
           
-          <div className='text-xl sm:text-2xl my-3'>
+          <motion.div
+          initial={{ opacity: 0, y: 40 }}
+       whileInView={{ opacity: 1, y: 0 }}
+       transition={{duration: 1, delay: 0.5}}
+          className='text-xl sm:text-2xl my-3'>
              <Title text1={'DELIVERY'} text2={'INFORMATION'} />
-          </div>
+          </motion.div>
           <div className='flex gap-3'>
             <input required onChange={onChangeHandler} name='firstName' value={formData.firstName} type="text" placeholder='First Name' className='border border-gray-300 rounded py-1.5 px-3.5 w-full' />
             <input required onChange={onChangeHandler} name='lastName' value={formData.lastName} type="text" placeholder='Last Name' className='border border-gray-300 rounded py-1.5 px-3.5 w-full' />
@@ -163,7 +172,12 @@ const PlaceOrder = () => {
           </div>
 
           <div className='mt-12'>
-            <Title text1={'PAYMENT'} text2={'METHOD'} />
+            <motion.div
+            initial={{ opacity: 0, y: 40 }}
+       whileInView={{ opacity: 1, y: 0 }}
+       transition={{duration: 1, delay: 0.5}}>
+              <Title text1={'PAYMENT'} text2={'METHOD'} />
+            </motion.div>
             {/* -----------Payment Method Selection----------------- */}
             <div  className='flex  gap-3 flex-col lg:flex-row'>
                <div onClick={()=>setMethod('stripe')} className='flex items-center gap-3 border p-2 px-3 cursor-pointer'>
@@ -185,7 +199,7 @@ const PlaceOrder = () => {
             </div>
           </div>
         </div>
-    </form>
+    </motion.form>
   )
 }
 

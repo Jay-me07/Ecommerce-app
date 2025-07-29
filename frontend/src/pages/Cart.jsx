@@ -3,6 +3,7 @@ import { ShopContext } from "../context/ShopContext";
 import Title from "../components/Title";
 import { assets } from "../assets/frontend_assets/assets";
 import CartTotal from "../components/CartTotal";
+import {motion} from "motion/react"
 
 const Cart = () => {
   const { products, currency, cartItems, updateQuantity, navigate } =
@@ -28,7 +29,11 @@ const Cart = () => {
   }, [cartItems, products]);
 
   return (
-    <div className="border-t pt-14">
+    <motion.div
+    initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1}}
+    className="border-t pt-14">
       <div className="text-2xl mb-3">
         <Title text1={"YOUR"} text2={"CART"} />
       </div>
@@ -40,7 +45,10 @@ const Cart = () => {
           );
 
           return (
-            <div
+            <motion.div
+            initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1}}
               key={index}
               className="py-4 border-t border-b text-gray-700 grid grid-cols-[4fr_0.5fr_0.5fr] sm:grid-cols-[4fr_2fr_0.5fr] items-center gap-4"
             >
@@ -86,12 +94,16 @@ const Cart = () => {
                 alt=""
                 className="w-4 mr-4 sm:w-5 cursor-pointer"
               />
-            </div>
+            </motion.div>
           );
         })}
       </div>
 
-      <div className="flex justify-end my-20">
+      <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1}}
+      className="flex justify-end my-20">
         <div className="w-full sm:w-[450px]">
           <CartTotal />
           <div className="w-full text-end">
@@ -103,8 +115,8 @@ const Cart = () => {
             </button>
           </div>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 
